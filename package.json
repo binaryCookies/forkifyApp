@@ -2,19 +2,25 @@
   "name": "forkify",
   "version": "1.0.0",
   "description": "Recipe application",
+  "default": "index.html",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "targets": {
+    "main": false
+  },
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html --dist-dir ./dist"
   },
-  "keywords": [],
   "author": "Yanal Kamal",
   "license": "ISC",
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.8.0",
+    "@parcel/transformer-sass": "^2.2.1",
     "parcel": "^2.8.0"
   },
   "dependencies": {
     "core-js": "^3.26.1",
+    "fractional": "^1.0.0",
+    "fracty": "^1.0.9",
     "regenerator-runtime": "^0.13.11"
   }
 }
