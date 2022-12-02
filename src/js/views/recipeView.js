@@ -8,6 +8,8 @@ class RecipeView {
   // save el to make it easy to render spinner...
   #parentElement = document.querySelector('.recipe');
   #data;
+  #errorMessage = 'We could not find the recipe, please try another.';
+  #message = '';
 
   render(data) {
     // Get rid of hardcode HTML before inserting HTML
@@ -23,7 +25,7 @@ class RecipeView {
     this.#parentElement.innerHTML = '';
   }
 
-  renderSpinner = function () {
+  renderSpinner() {
     const markup = `
     <div class="spinner">
             <svg>
@@ -31,9 +33,41 @@ class RecipeView {
             </svg>
           </div>
     `;
-    this.#parentElement.innerHTML = '';
+    this.#clear();
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
-  };
+  }
+
+  // 295. Error Message
+  renderError(message = this.#errorMessage) {
+    const markup = `
+          <div class="error">
+            <div>
+              <svg>
+                <use href="${icons}.svg#icon-alert-triangle"></use>
+              </svg>
+            </div>
+            <p>${message}</p>
+          </div>
+    `;
+    this.#clear();
+    this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+  }
+
+  // 295. Success Message
+  renderMessage(message = this.#message) {
+    const markup = `
+          <div class="message">
+            <div>
+              <svg>
+                <use href="${icons}.svg#icon-alert-smile"></use>
+              </svg>
+            </div>
+            <p>${message}</p>
+          </div>
+    `;
+    this.#clear();
+    this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+  }
 
   // 294. Refactored from controller
   addHandlerRender(handler) {
