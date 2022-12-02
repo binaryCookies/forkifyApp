@@ -4,11 +4,15 @@ import { getJSON } from './helpers';
 
 export const state = {
   recipe: {},
+  search: {
+    query: '',
+    results: [],
+  },
 };
 
 export const loadRecipe = async function (id) {
   try {
-    const data = await getJSON(`${API_URL}/${id}`);
+    const data = await getJSON(`${API_URL}${id}`);
     // const res = await fetch(`${API_URL}/${id}`);
 
     // Transform object properties from the server
@@ -31,3 +35,27 @@ export const loadRecipe = async function (id) {
     throw err;
   }
 };
+
+// VIDEO 296. Implementing Search Results - Part 1
+export const loadSearchResults = async function (query) {
+  try {
+    state.search.query = query;
+
+    const data = await getJSON(`${API_URL}?search=${query}`);
+    // console.log(296, { data });
+
+    state.search.results = data.data.recipes.map(rec => {
+      return {
+        id: rec.id,
+        title: rec.title,
+        publisher: rec.publisher,
+        image: rec.image_url,
+      };
+    });
+    // console.log(state.search.results);
+  } catch (err) {
+    console.error(`${err}💥`);
+    throw err;
+  }
+};
+// loadSearchResults('pizza')

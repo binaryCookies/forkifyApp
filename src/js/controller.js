@@ -3,11 +3,9 @@ import * as model from './model.js';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import recipeView from './views/recipeView.js';
-
-// const recipeContainer = document.querySelector('.recipe');
+import searchView from './views/searchView.js';
 
 // https://forkify-api.herokuapp.com/v2
-
 ///////////////////////////////////////
 
 // VIDEO 288. Loading a Recipe from API
@@ -37,17 +35,27 @@ const controlRecipes = async function () {
 };
 controlRecipes();
 
-// VIDEO 290. Listening For load and hashchange Events
-// listen for hash change, take hash from url, take the id load recipe from id
-// fake url change to listen to event (used anchor tag to link to a recipe)
-//
+// VIDEO 296. Implementing Search Results - Part 1
+const contolSearchResults = async function () {
+  try {
+    // 296. 1) Get search query
+    const query = searchView.getQuery();
+    if (!query) return;
 
-// dry up code, loop the events
-// window.addEventListener('hashchange', controlRecipes);
-// window.addEventListener('load', controlRecipes);
+    // 2) Load search results
+    await model.loadSearchResults(query);
+
+    // 3) Render results
+    console.log(model.state.search.results);
+  } catch (err) {
+    console.error(err);
+  }
+};
+contolSearchResults();
 
 const init = function () {
   // pass controlRecipes to the RecipeView.addHandlerRender(hanlder)
   recipeView.addHandlerRender(controlRecipes);
+  searchView.addHandlerSearch(contolSearchResults);
 };
 init();
