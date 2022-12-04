@@ -58,4 +58,23 @@ export const loadSearchResults = async function (query) {
     throw err;
   }
 };
-// loadSearchResults('pizza')
+
+// export const loadSearchResults2 = async function (query) {
+//   try {
+//     const data = await getJSON(`${API_URL}?search=${query}`);
+
+//     state.search.results = data.data.recipes.map(rec => {
+//       return {
+//         id: rec.id,
+//         title: rec.title,
+//         publisher: rec.publisher,
+//         image: rec.image_url,
+//       };
+//     });
+
+//     console.log(state.search.results);
+//   } catch (err) {
+//     console.error(`${err}💥💥💥`);
+//   }
+// };
+// loadSearchResults2('pasta');
