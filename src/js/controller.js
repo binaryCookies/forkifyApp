@@ -38,6 +38,9 @@ const controlRecipes = async function () {
     recipeView.renderError();
     // console.error(error);
   }
+
+  // NOTE TEST: this function placed here for testing
+  // controlServings();
 };
 
 // VIDEO 296. Implementing Search Results - Part 1
@@ -69,6 +72,7 @@ const controlSearchResults = async function () {
   }
 };
 
+// VIDEO 299. Implementing Pagination - Part 2
 const controlPagination = function (gotoPage) {
   console.log('pag controller', gotoPage);
   // 1) Render NEW results
@@ -78,10 +82,20 @@ const controlPagination = function (gotoPage) {
   paginationView.render(model.state.search);
 };
 
+// VIDEO 301. Updating Recipe Servings
+const controlServings = function (newServings) {
+  // update the recipe servings (in state)
+  model.updateServings(newServings);
+
+  // Update the recipe view
+  recipeView.render(model.state.recipe);
+};
+
 const init = function () {
   // pass controlRecipes to the RecipeView.addHandlerRender(hanlder)
   recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerUpdateServings(controlServings);
   searchView.addHandlerSearch(controlSearchResults);
-  paginationView.addHandlerClick(controlPagination);
+  paginationView.addHandlerClick(controlPagination); // 299.
 };
 init();

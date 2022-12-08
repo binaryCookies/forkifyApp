@@ -15,8 +15,10 @@ class PaginationView extends View {
 
       if (!btn) return;
 
+      // Custom data properties
       const gotoPage = +btn.dataset.goto;
       //   console.log(gotoPage); // pass into handler
+
       handler(gotoPage);
     });
   }
