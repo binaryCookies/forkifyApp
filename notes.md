@@ -245,4 +245,15 @@ check if array contains matching id
 
 setItem: controller add function to set item to local storage _'bookmarks'_ with the value coming from _state.bookmarks_, must stringify value in local storage
 getItem: cun init and get bookmarks out of local storage to render in preview
-add handler in bookmarks view on the load event
+add handler in bookmarks view to render bookmarks on the load event
+
+## 307. Uploading a New Recipe - Part 1
+
+- created addRecipeView.js
+- constructor method in addRecipeView
+- super
+- addHandlerShowWindow
+- toggle class hidden attribute
+- bind, manually set the this keyword in the event handler because the the this keyword inside an handler function points to the element on which the listener is attached to
+- NOTE addHandlerUpload: used form data to get access to form data, `const data = [...new FormData(this)]`, must pass in an element that is a form
+- Object.fromEntries: convert the entries data array to an object

@@ -92,6 +92,7 @@ export const updateServings = function (newServings) {
   // update state for multiple updates (recall previous update not original state before updating)
   state.recipe.servings = newServings;
 };
+
 // VIDEO 305. Storing Bookmarks With localStorage
 const persistBookmarks = function () {
   localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
