@@ -4,6 +4,7 @@ import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
 
+import { MODAL_CLOSE_SEC } from './config';
 import paginationView from './views/paginationView.js';
 import bookmarksView from './views/bookmarksView.js';
 import addRecipeView from './views/addRecipeView.js';
@@ -38,11 +39,11 @@ const controlRecipes = async function () {
     // const { recipe } = model.state;
 
     // 2) Rendering recipe, accept data and store in Class
-    recipeView.render(model.state.recipe);
+
     // const recipeView = new recipeView(model.state.recipe) // this could also work
 
     // 3) Updating bookmarksView
-
+    console.log(state.recipe);
     bookmarksView.update(model.state.bookmarks);
   } catch (err) {
     recipeView.renderError();
@@ -125,10 +126,30 @@ const controlBookmarks = function () {
 };
 
 // 307.
-const controlAddRecipe = function (newRecipe) {
-  console.log(newRecipe);
+const controlAddRecipe = async function (newRecipe) {
+  try {
+    // Show loading spinner
+    addRecipeView.renderSpinner();
 
-  // upload
+    // console.log(newRecipe);    // Upload the new recipe data,
+    await model.uploadRecipe(newRecipe);
+
+    console.log(model.state.recipe);
+
+    // Render recipe
+    recipeView.render(model.state.recipe);
+
+    // Render Success
+    addRecipeView.renderMessage();
+
+    // Close form window
+    setTimeout(function () {
+      addRecipeView.toggleWindow();
+    }, MODAL_CLOSE_SEC * 1000);
+  } catch (err) {
+    console.error(`${err}💥💥`);
+    addRecipeView.renderError(err.message);
+  }
 };
 
 const init = function () {

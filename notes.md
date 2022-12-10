@@ -257,3 +257,12 @@ add handler in bookmarks view to render bookmarks on the load event
 - bind, manually set the this keyword in the event handler because the the this keyword inside an handler function points to the element on which the listener is attached to
 - NOTE addHandlerUpload: used form data to get access to form data, `const data = [...new FormData(this)]`, must pass in an element that is a form
 - Object.fromEntries: convert the entries data array to an object
+
+## 308. Uploading a New Recipe - Part 2
+
+- Model uploadRecipe(): create async function to make call to API
+- startsWith(), filtered out array for keys that start with ingredient and the values are not an empty string
+- tranform data to match our existing data structure
+- return the transformed object with the quantity, unit and description keys
+- sendJSON helpers file
+- sending data using the fetch function:

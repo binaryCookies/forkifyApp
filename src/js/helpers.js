@@ -25,3 +25,28 @@ export const getJSON = async function (url) {
     throw err;
   }
 };
+
+// VIDEO 308.
+export const sendJSON = async function (url, uploadData) {
+  try {
+    // const res = await fetch(`${API_URL}/${id}`);
+    const fetchPro = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(uploadData),
+    });
+
+    const res = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]);
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(`${data.message} (${res.status}) `);
+
+    return data;
+  } catch (err) {
+    // 293. rethrow err to handle inside of model
+    // otherwise Prommise wont reject on ex. bad request
+    throw err;
+  }
+};

@@ -5,11 +5,10 @@ import icons from 'url:../../img/icons.svg';
 
 class AddRecipeView extends View {
   _parentElement = document.querySelector('.upload');
+  _message = 'Recipe was successfully uploaded :)';
 
   _window = document.querySelector('.add-recipe-window');
-
   _overlay = document.querySelector('.overlay');
-
   _btnOpen = document.querySelector('.nav__btn--add-recipe');
   _btnClose = document.querySelector('.btn--close-modal');
 
@@ -39,7 +38,7 @@ class AddRecipeView extends View {
 
       // NOTE FormData Constructor (to get all the values from the form)
       const dataArr = [...new FormData(this)];
-      //   console.log(dataArr);
+      //  console.log(dataArr);
 
       // convert array to an object
       const data = Object.fromEntries(dataArr);
