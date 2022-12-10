@@ -92,6 +92,10 @@ export const updateServings = function (newServings) {
   // update state for multiple updates (recall previous update not original state before updating)
   state.recipe.servings = newServings;
 };
+// VIDEO 305. Storing Bookmarks With localStorage
+const persistBookmarks = function () {
+  localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
+};
 
 // VIDEO 303. Implementing Bookmarks - Part 1
 
@@ -101,6 +105,8 @@ export const addBookmark = function (recipe) {
 
   // Mark current recipe as bookmark
   if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
+
+  persistBookmarks();
 };
 
 export const deleteBookmark = function (id) {
@@ -110,4 +116,18 @@ export const deleteBookmark = function (id) {
 
   // Un-Mark current recipe as NOT bookmarked
   if (id === state.recipe.id) state.recipe.bookmarked = false;
+
+  persistBookmarks();
 };
+
+// 305.
+const init = function () {
+  const storage = localStorage.getItem('bookmarks');
+  if (storage) state.bookmarks = JSON.parse(storage);
+};
+init();
+
+const clearBookmarks = function () {
+  localStorage.clear('bookmarks');
+};
+// clearBookmarks();
