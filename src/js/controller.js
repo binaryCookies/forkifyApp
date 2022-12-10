@@ -3,7 +3,9 @@ import * as model from './model.js';
 import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
+
 import paginationView from './views/paginationView.js';
+import bookmarksView from './views/bookmarksView.js';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
@@ -28,6 +30,7 @@ const controlRecipes = async function () {
 
     // 0) Update resultsView to mark selected search result
     resultsView.update(model.getSearchResultsPage());
+    bookmarksView.update(model.state.bookmarks);
 
     // 1) Loading recipe, returns a promise
     // get access to state.recipe from model
@@ -66,7 +69,7 @@ const controlSearchResults = async function () {
     // 3) Render results
     // 297., 298., 299
     // resultsView.render(model.state.search.results);
-    resultsView.render(model.getSearchResultsPage(4));
+    resultsView.render(model.getSearchResultsPage());
 
     // 4) Render initial pagination buttons
     paginationView.render(model.state.search);
@@ -96,10 +99,27 @@ const controlServings = function (newServings) {
   // recipeView.render(model.state.recipe);
 };
 
+// VIDEO 303. Implementing Bookmarks - Part 1
+// VIDEO 304. Implementing Bookmarks - Part 2
+const controlAddBookmark = function () {
+  // 1) Add/remove bookmark
+  if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
+  else model.deleteBookmark(model.state.recipe.id);
+
+  // 2) Update recipeView
+  recipeView.update(model.state.recipe);
+
+  // 3) Render the bookmarks
+  bookmarksView.render(model.state.bookmarks);
+
+  console.log(model.state.recipe);
+};
+
 const init = function () {
   // pass controlRecipes to the RecipeView.addHandlerRender(hanlder)
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings);
+  recipeView.addHandlerAddBookmark(controlAddBookmark);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination); // 299.
 };
