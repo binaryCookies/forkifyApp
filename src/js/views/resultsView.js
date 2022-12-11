@@ -10,7 +10,7 @@ class ResultsView extends View {
 
   _generateMarkup() {
     // Available from the View superCLass
-    // console.log(this._data);
+    console.log(this._data);
     return this._data.map(result => previewView.render(result, false)).join('');
   }
 }

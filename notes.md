@@ -266,3 +266,71 @@ add handler in bookmarks view to render bookmarks on the load event
 - return the transformed object with the quantity, unit and description keys
 - sendJSON helpers file
 - sending data using the fetch function:
+
+## 309. Uploading a New Recipe - Part 3
+
+window.history.pushState(null, '', `#${model.state.recipe.id}`)
+We can use this api for other things, allows to change the url without reloading of the page.
+
+example. window.history.back()
+
+previewView: added icon markup and logic to show icon for recipes we uploaded
+recipeView added hidden class to icon if user key is not in the recipe object
+model load search results: added jet to search data
+
+## 310. Wrapping Up: Final Considerations
+
+Documentation: jsdocs.app
+
+/\*\*
+@param {Object | Object[]} data The data to be rendereed (eg recipe)
+@param {boolean} [render=true] if false create markup string instead of rendering to the DOM
+
+\*/
+
+Features to implement
+
+1. display number of pages between the pagination buttons
+2. Ability to sort search results by duration or number of ingredients
+3. Perform ingredient validation in view, before submitting the form
+4. Improve recipe ingredient input: separate in multiple fields and allow more than 6 ingredients
+
+5. Shopping list feature: button on recipe to add ingredients to a list
+6. Weekly meal planning feature: assigne recipes to the next 7 days and show an a weekly calendar
+7. Get nutrition data on each ingredient fro spoonacular API and calculate total calories of a recipe
+   1. https://spoonacular.com/food-api
+
+THE BUILD
+We have been using run npm start (development) but now to deploy and compress we need to use npm run build for the final
+Delete the parcel-cache and dist folders
+package.json: rename the "main" to "default"
+Setup netlify or surge accounts to host html, css, js files (no server side code or db's)
+
+GIT
+
+1. git init in top level project folders
+2. connect local to gitHub: git config --global user.name binaryCookies -> ENTER
+3. connect local to gitHub: git config --global user.email {enter gitHub email address} -> ENTER
+4. git rm r- --cached .parcel-cache: recursively remove files that have previously been added to GIT
+5. add files to staging area
+6. reverting to older version (previous commit): git reset --hard HEAD, removes codes since last commit.
+7. reverting to older version if already committed (not pushed):
+   1. git log: copy ID of commit version we need
+   2. type q for QUIT or sometimes :q
+   3. git reset --hard {paste the id no brackets}
+8. create new branch
+   1. git branch: for list of branches
+   2. Create new Branch: git branch nameOfTheBranch
+   3. Switch branch: git checkout nameOfBranchToSwitchTo
+   4. Commit new feature to the new branch
+   5. switch back to Master branch to note new feature is not in the Master branch
+   6. Merge changes: git merge new code with the current branch: git merge new-feature-branch
+
+Pushing
+
+1. Github create new repository
+2. make private
+3. skip the readme section if repository exists already
+4. push existing repository to online repository
+5. paste git remote origin + gitHub URL
+6. git push origin [name of the branch]
