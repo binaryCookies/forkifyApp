@@ -341,3 +341,21 @@ Pushing
 Continous deployment of app with GitHub
 link site to gitHub, follow directions,
 step 3 input form: in build command use package.json build command: parcel build index.html --dist-dir ./dist
+
+FIXME: TODO
+For those who have this problem:
+in console write: npm i fracty
+Go to your recipeView.js, then replace:
+import { Fraction } from 'fractional';
+to this:
+import fracty from 'fracty';
+And in the same file replace:
+
+new Fraction(ing.quantity.toString())
+
+to this:
+
+fracty(ing.quantity)
+Then in console write: npm run build
+
+Deploy dist folder to netlify and it should be working.
