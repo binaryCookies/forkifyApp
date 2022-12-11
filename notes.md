@@ -334,3 +334,10 @@ Pushing
 4. push existing repository to online repository
 5. paste git remote origin + gitHub URL
 6. git push origin [name of the branch]
+7. 7. Each branch must be pushed separately
+
+8. git commit –amend, amend last commit, good gor adding files/changes to the previous commit
+
+Continous deployment of app with GitHub
+link site to gitHub, follow directions,
+step 3 input form: in build command use package.json build command: parcel build index.html --dist-dir ./dist
